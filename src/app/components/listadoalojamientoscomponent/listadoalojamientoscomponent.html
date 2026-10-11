@@ -1,0 +1,15 @@
+<div class="container mt-4">
+  <h1 class="mb-4">Alojamientos disponibles</h1>
+
+  <app-filtros [ciudades]="ciudades" [tipos]="tipos" (filtrosCambiaron)="aplicarFiltros($event)"></app-filtros>
+
+  <div class="alert alert-info" *ngIf="filtrados.length === 0">
+    No se encontraron alojamientos con esos filtros.
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let alojamiento of filtrados">
+      <app-alojamiento-card [alojamiento]="alojamiento" [mostrarDetalles]="true"></app-alojamiento-card>
+    </div>
+  </div>
+</div>
