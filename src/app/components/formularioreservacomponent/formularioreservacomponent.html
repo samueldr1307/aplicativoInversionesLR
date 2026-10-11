@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <h1 class="mb-4">Confirmar reserva</h1>
+
+  <div *ngIf="!cotizacion" class="alert alert-warning">
+    No hay ninguna cotización activa. Vuelve al detalle de un alojamiento y genera una cotización primero.
+  </div>
+
+  <div *ngIf="cotizacion" class="row">
+    <div class="col-md-6">
+      <div class="card p-3 mb-3">
+        <h4>{{cotizacion.alojamiento.nombre}}</h4>
+        <p>{{cotizacion.alojamiento.ciudad}}</p>
+        <p>Llegada: {{cotizacion.fechaLlegada}}</p>
+        <p>Salida: {{cotizacion.fechaSalida}}</p>
+        <p>Huéspedes: {{cotizacion.huespedes}}</p>
+        <p>Noches: {{cotizacion.noches}}</p>
+        <p class="fw-bold">Total: ${{cotizacion.total}}</p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card p-3">
+        <label class="form-label">Nombre del huésped</label>
+        <input type="text" class="form-control" [(ngModel)]="nombre">
+
+        <label class="form-label mt-2">Correo electrónico</label>
+        <input type="email" class="form-control" [(ngModel)]="correo">
+
+        <div class="alert alert-danger mt-3" *ngIf="mensajeError">{{mensajeError}}</div>
+
+        <button class="btn btn-success mt-3" (click)="confirmarReserva()">Confirmar reserva</button>
+      </div>
+    </div>
+  </div>
+</div>
+
