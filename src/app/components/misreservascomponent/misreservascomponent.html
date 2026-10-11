@@ -1,0 +1,14 @@
+<div class="container mt-4">
+  <h1 class="mb-4">Mis reservas</h1>
+
+  <p *ngIf="reservas.length === 0" class="text-muted">Aún no tienes reservas.</p>
+
+  <div class="card mb-3 p-3" *ngFor="let reserva of reservas">
+    <h5>{{reserva.nombreAlojamiento}}</h5>
+    <p>{{reserva.ciudad}}</p>
+    <p>Llegada: {{reserva.fechaLlegada}} - Salida: {{reserva.fechaSalida}}</p>
+    <p>Huéspedes: {{reserva.huespedes}}</p>
+    <p class="fw-bold">Total: ${{reserva.total}}</p>
+    <span class="badge bg-success">{{reserva.estado}}</span>
+  </div>
+</div>
