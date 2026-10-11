@@ -1,1 +1,62 @@
-<p>detallealojamientocomponent works!</p>
+<div class="container mt-4" *ngIf="alojamiento">
+  <div class="row">
+    <div class="col-md-8">
+      <img [src]="alojamiento.imagenPrincipal" class="img-fluid rounded mb-3" alt="{{alojamiento.nombre}}">
+
+      <h1>{{alojamiento.nombre}}</h1>
+      <p class="text-muted">{{alojamiento.ubicacion}} - {{alojamiento.ciudad}}</p>
+      <p>{{alojamiento.descripcion}}</p>
+
+      <div class="row mb-3">
+        <div class="col-6 col-md-3">
+          <strong>Tipo</strong><br>{{alojamiento.tipo}}
+        </div>
+        <div class="col-6 col-md-3">
+          <strong>Capacidad</strong><br>{{alojamiento.capacidad}} personas
+        </div>
+        <div class="col-6 col-md-3">
+          <strong>Habitaciones</strong><br>{{alojamiento.habitaciones}}
+        </div>
+        <div class="col-6 col-md-3">
+          <strong>Camas</strong><br>{{alojamiento.camas}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6 col-md-3">
+          <strong>Baños</strong><br>{{alojamiento.banos}}
+        </div>
+        <div class="col-6 col-md-3">
+          <strong>Calificación</strong><br>{{alojamiento.calificacion}}
+        </div>
+      </div>
+
+      <h4>Servicios</h4>
+      <ul>
+        <li *ngFor="let s of alojamiento.servicios">{{s}}</li>
+      </ul>
+
+      <h4>Reglas</h4>
+      <ul>
+        <li *ngFor="let r of alojamiento.reglas">{{r}}</li>
+      </ul>
+
+      <h4>Reseñas</h4>
+      <p *ngIf="resenas.length === 0" class="text-muted">Este alojamiento aún no tiene reseñas.</p>
+      <div *ngFor="let resena of resenas" class="mb-2">
+        <strong>{{resena.usuario}}</strong> - {{resena.calificacion}}/5
+        <p>{{resena.comentario}}</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <app-cotizacioncomponent [alojamiento]="alojamiento"></app-cotizacioncomponent>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4" *ngIf="noDisponible">
+  <div class="alert alert-warning">
+    Este alojamiento no existe o no está disponible.
+  </div>
+  <a routerLink="/listado" class="btn btn-primary">Volver al listado</a>
+</div>
