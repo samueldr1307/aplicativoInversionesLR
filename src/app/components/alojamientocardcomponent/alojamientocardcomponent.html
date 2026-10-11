@@ -1,1 +1,21 @@
-<p>alojamientocardcomponent works!</p>
+<div class="tarjeta h-100 d-flex flex-column" *ngIf="alojamiento">
+  <div class="foto-caja">
+    <img [src]="alojamiento.imagenPrincipal" class="foto" alt="{{alojamiento.nombre}}">
+    <span class="calificacion">★ {{alojamiento.calificacion}}</span>
+  </div>
+
+  <div class="p-3 d-flex flex-column flex-grow-1">
+    <p class="ciudad mb-1">{{alojamiento.ciudad}} · {{alojamiento.tipo}}</p>
+    <h5 class="mb-2">{{alojamiento.nombre}}</h5>
+
+    <p class="ciudad mb-2" *ngIf="mostrarDetalles">Hasta {{alojamiento.capacidad}} huéspedes</p>
+    <div class="mb-3" *ngIf="mostrarDetalles">
+      <span class="etiqueta" *ngFor="let s of alojamiento.servicios">{{s}}</span>
+    </div>
+
+    <div class="mt-auto d-flex justify-content-between align-items-center">
+      <p class="precio mb-0">${{alojamiento.precioNoche}} <span>/ noche</span></p>
+      <a routerLink="/alojamiento/{{alojamiento.id}}" class="btn btn-marca btn-sm">Ver detalle</a>
+    </div>
+  </div>
+</div>
