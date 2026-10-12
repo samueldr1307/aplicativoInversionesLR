@@ -3,6 +3,12 @@
     <div class="col-md-8">
       <img [src]="alojamiento.imagenPrincipal" class="img-fluid rounded mb-3" alt="{{alojamiento.nombre}}">
 
+      <div class="row g-2 mb-4">
+        <div class="col-4" *ngFor="let img of alojamiento.imagenes">
+          <img [src]="img" class="img-fluid rounded" alt="{{alojamiento.nombre}}">
+        </div>
+      </div>
+
       <h1>{{alojamiento.nombre}}</h1>
       <p class="text-muted">{{alojamiento.ubicacion}} - {{alojamiento.ciudad}}</p>
       <p>{{alojamiento.descripcion}}</p>
