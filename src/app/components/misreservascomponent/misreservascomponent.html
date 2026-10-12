@@ -1,14 +1,234 @@
-<div class="container mt-4">
-  <h1 class="mb-4">Mis reservas</h1>
+<div class="container my-5 py-2">
+  <!-- Migas de pan -->
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/" class="text-decoration-none">Inicio</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Mis Reservas</li>
+    </ol>
+  </nav>
 
-  <p *ngIf="reservas.length === 0" class="text-muted">Aún no tienes reservas.</p>
+  <!-- Encabezado de la página -->
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+    <div>
+      <h1 class="h2 fw-bold mb-1">Mis Reservas</h1>
+      <p class="text-muted mb-0">
+        Consulta el estado y los detalles de las reservas simuladas realizadas durante esta sesión.
+      </p>
+    </div>
+    <div *ngIf="reservas.length > 0">
+      <a routerLink="/listado" class="btn btn-marca-outline">
+        + Reservar otro alojamiento
+      </a>
+    </div>
+  </div>
 
-  <div class="card mb-3 p-3" *ngFor="let reserva of reservas">
-    <h5>{{reserva.nombreAlojamiento}}</h5>
-    <p>{{reserva.ciudad}}</p>
-    <p>Llegada: {{reserva.fechaLlegada}} - Salida: {{reserva.fechaSalida}}</p>
-    <p>Huéspedes: {{reserva.huespedes}}</p>
-    <p class="fw-bold">Total: ${{reserva.total}}</p>
-    <span class="badge bg-success">{{reserva.estado}}</span>
+  <!-- Banner de Notificación / Alerta dinámica -->
+  <div
+    *ngIf="mensajeAlerta"
+    class="alert d-flex align-items-center justify-content-between mb-4 shadow-sm"
+    [ngClass]="{
+      'alert-success': tipoAlerta === 'success',
+      'alert-warning': tipoAlerta === 'warning',
+      'alert-info': tipoAlerta === 'info'
+    }"
+    role="alert"
+  >
+    <div class="d-flex align-items-center gap-2">
+      <span class="fs-5">{{ tipoAlerta === 'success' ? '🎉' : 'ℹ️' }}</span>
+      <div>{{ mensajeAlerta }}</div>
+    </div>
+    <button type="button" class="btn-close" (click)="cerrarAlerta()" aria-label="Cerrar"></button>
+  </div>
+
+  <!-- Barra de Estadísticas y Filtros (si existen reservas) -->
+  <div *ngIf="reservas.length > 0" class="row g-3 mb-4">
+    <div class="col-sm-6 col-md-4">
+      <div class="stat-tarjeta p-3 rounded shadow-sm d-flex align-items-center gap-3 bg-white">
+        <div class="stat-icono bg-verde-subtle text-verde">📋</div>
+        <div>
+          <span class="d-block text-muted small">Total Reservas</span>
+          <strong class="h4 mb-0">{{ reservas.length }}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <div class="stat-tarjeta p-3 rounded shadow-sm d-flex align-items-center gap-3 bg-white">
+        <div class="stat-icono bg-success-subtle text-success">✅</div>
+        <div>
+          <span class="d-block text-muted small">Confirmadas</span>
+          <strong class="h4 mb-0">{{ cantidadConfirmadas }}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <div class="stat-tarjeta p-3 rounded shadow-sm d-flex align-items-center gap-3 bg-white">
+        <div class="stat-icono bg-coral-subtle text-coral">💰</div>
+        <div>
+          <span class="d-block text-muted small">Valor Confirmado</span>
+          <strong class="h4 mb-0">${{ totalInversion | number:'1.0-0' }} COP</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pestañas de Filtrado -->
+  <div *ngIf="reservas.length > 0" class="d-flex gap-2 mb-4 border-bottom pb-3">
+    <button
+      type="button"
+      class="btn btn-sm"
+      [ngClass]="filtroEstado === 'TODAS' ? 'btn-marca' : 'btn-light'"
+      (click)="cambiarFiltro('TODAS')"
+    >
+      Todas ({{ reservas.length }})
+    </button>
+    <button
+      type="button"
+      class="btn btn-sm"
+      [ngClass]="filtroEstado === 'CONFIRMADA' ? 'btn-marca' : 'btn-light'"
+      (click)="cambiarFiltro('CONFIRMADA')"
+    >
+      Confirmadas ({{ cantidadConfirmadas }})
+    </button>
+    <button
+      type="button"
+      class="btn btn-sm"
+      [ngClass]="filtroEstado === 'CANCELADA' ? 'btn-marca' : 'btn-light'"
+      (click)="cambiarFiltro('CANCELADA')"
+    >
+      Canceladas ({{ cantidadCanceladas }})
+    </button>
+  </div>
+
+  <!-- Estado Vacío General: Si NO existen reservas -->
+  <div *ngIf="reservas.length === 0" class="tarjeta-vacia text-center p-5 mx-auto">
+    <div class="icono-vacio mb-3">🧳</div>
+    <h2 class="h3 fw-bold mb-2">Aún no tienes reservas</h2>
+    <p class="text-muted mb-4 max-w-md mx-auto">
+      No has registrado ninguna reserva todavía. Explora nuestro catálogo de alojamientos en Colombia, cotiza tus fechas preferidas y confirma tu primera estancia.
+    </p>
+    <a routerLink="/listado" class="btn btn-marca btn-lg px-4">
+      Explorar alojamientos disponibles
+    </a>
+  </div>
+
+  <!-- Estado Vacío por Filtro -->
+  <div *ngIf="reservas.length > 0 && reservasFiltradas.length === 0" class="text-center p-5 bg-white rounded shadow-sm">
+    <p class="text-muted mb-3">No tienes reservas con el filtro seleccionado ({{ filtroEstado }}).</p>
+    <button class="btn btn-sm btn-outline-secondary" (click)="cambiarFiltro('TODAS')">
+      Mostrar todas las reservas
+    </button>
+  </div>
+
+  <!-- Listado de Reservas -->
+  <div *ngIf="reservasFiltradas.length > 0" class="row g-4">
+    <div *ngFor="let reserva of reservasFiltradas" class="col-12">
+      <div class="reserva-card tarjeta p-0 overflow-hidden shadow-sm" [class.cancelada-card]="reserva.estado === 'CANCELADA'">
+        <div class="row g-0 align-items-stretch">
+          <!-- Miniatura del Alojamiento -->
+          <div class="col-md-4 col-lg-3 position-relative">
+            <img
+              *ngIf="reserva.imagenAlojamiento"
+              [src]="reserva.imagenAlojamiento"
+              [alt]="reserva.nombreAlojamiento"
+              class="reserva-foto w-100 h-100"
+            />
+            <div
+              *ngIf="!reserva.imagenAlojamiento"
+              class="reserva-foto-placeholder w-100 h-100 d-flex align-items-center justify-content-center bg-light text-muted"
+            >
+              <span>🏡</span>
+            </div>
+            <span class="badge-id position-absolute top-0 start-0 m-3">
+              #{{ reserva.id }}
+            </span>
+          </div>
+
+          <!-- Contenido de la Reserva -->
+          <div class="col-md-8 col-lg-9 p-4 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                <div>
+                  <h3 class="h4 fw-bold mb-1">
+                    <a [routerLink]="['/alojamiento', reserva.alojamientoId]" class="text-decoration-none text-dark">
+                      {{ reserva.nombreAlojamiento }}
+                    </a>
+                  </h3>
+                  <span class="text-muted small">📍 {{ reserva.ciudad }}</span>
+                </div>
+                <!-- Badge de Estado -->
+                <div>
+                  <span
+                    class="badge px-3 py-2 fs-6 rounded-pill"
+                    [ngClass]="{
+                      'bg-success': reserva.estado === 'CONFIRMADA',
+                      'bg-secondary': reserva.estado === 'CANCELADA'
+                    }"
+                  >
+                    ● {{ reserva.estado }}
+                  </span>
+                </div>
+              </div>
+
+              <hr class="my-3 opacity-25" />
+
+              <!-- Fechas y Huéspedes -->
+              <div class="row g-3 small mb-3">
+                <div class="col-6 col-sm-3">
+                  <span class="d-block text-muted">Fecha de llegada:</span>
+                  <strong class="d-block">{{ reserva.fechaLlegada }}</strong>
+                </div>
+                <div class="col-6 col-sm-3">
+                  <span class="d-block text-muted">Fecha de salida:</span>
+                  <strong class="d-block">{{ reserva.fechaSalida }}</strong>
+                </div>
+                <div class="col-6 col-sm-3">
+                  <span class="d-block text-muted">Estancia:</span>
+                  <strong class="d-block">{{ reserva.noches }} {{ reserva.noches === 1 ? 'noche' : 'noches' }}</strong>
+                </div>
+                <div class="col-6 col-sm-3">
+                  <span class="d-block text-muted">Huéspedes:</span>
+                  <strong class="d-block">{{ reserva.huespedes }} {{ reserva.huespedes === 1 ? 'huésped' : 'huéspedes' }}</strong>
+                </div>
+              </div>
+
+              <!-- Huésped Titular -->
+              <div class="titular-bloque p-2 rounded small mb-3 d-flex flex-wrap gap-3 align-items-center">
+                <div>
+                  <span class="text-muted">Titular: </span>
+                  <strong>{{ reserva.nombreHuesped }}</strong>
+                </div>
+                <div>
+                  <span class="text-muted">Contacto: </span>
+                  <a [href]="'mailto:' + reserva.correo" class="text-decoration-none">{{ reserva.correo }}</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer de la Tarjeta con Total y Acciones -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center pt-2 border-top gap-2">
+              <div>
+                <span class="d-block small text-muted">Valor total de la reserva:</span>
+                <strong class="h4 mb-0 text-verde">${{ reserva.total | number:'1.0-0' }} COP</strong>
+              </div>
+
+              <div class="d-flex gap-2">
+                <a [routerLink]="['/alojamiento', reserva.alojamientoId]" class="btn btn-sm btn-outline-secondary">
+                  Ver alojamiento
+                </a>
+                <button
+                  *ngIf="reserva.estado === 'CONFIRMADA'"
+                  type="button"
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="cancelarReserva(reserva.id, reserva.nombreAlojamiento)"
+                >
+                  Cancelar reserva
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+

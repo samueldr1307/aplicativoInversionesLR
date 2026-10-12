@@ -1,36 +1,250 @@
-<div class="container mt-4">
-  <h1 class="mb-4">Confirmar reserva</h1>
+<div class="container my-5 py-2">
+  <!-- Encabezado y migas de pan -->
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/" class="text-decoration-none">Inicio</a></li>
+      <li class="breadcrumb-item"><a routerLink="/listado" class="text-decoration-none">Alojamientos</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Confirmar Reserva</li>
+    </ol>
+  </nav>
 
-  <div *ngIf="!cotizacion" class="alert alert-warning">
-    No hay ninguna cotización activa. Vuelve al detalle de un alojamiento y genera una cotización primero.
+  <!-- Estado Sin Cotización Activa -->
+  <div *ngIf="!cotizacion" class="tarjeta-vacia text-center p-5 mx-auto">
+    <div class="icono-vacio mb-3">🗓️</div>
+    <h2 class="h3 fw-bold mb-2">No hay ninguna cotización activa</h2>
+    <p class="text-muted mb-4 max-w-md mx-auto">
+      Para simular una reserva, primero debes seleccionar un alojamiento, ingresar tus fechas de viaje y generar una cotización válida.
+    </p>
+    <a routerLink="/listado" class="btn btn-marca btn-lg px-4">
+      Explorar alojamientos disponibles
+    </a>
   </div>
 
-  <div *ngIf="cotizacion" class="row">
-    <div class="col-md-6">
-      <div class="card p-3 mb-3">
-        <h4>{{cotizacion.alojamiento.nombre}}</h4>
-        <p>{{cotizacion.alojamiento.ciudad}}</p>
-        <p>Llegada: {{cotizacion.fechaLlegada}}</p>
-        <p>Salida: {{cotizacion.fechaSalida}}</p>
-        <p>Huéspedes: {{cotizacion.huespedes}}</p>
-        <p>Noches: {{cotizacion.noches}}</p>
-        <p class="fw-bold">Total: ${{cotizacion.total}}</p>
+  <!-- Flujo de Reserva con Cotización Válida -->
+  <div *ngIf="cotizacion" class="row g-4">
+    <!-- Columna Izquierda: Resumen del Alojamiento y Cotización -->
+    <div class="col-lg-5 order-lg-2">
+      <div class="resumen-card tarjeta p-0 overflow-hidden shadow-sm">
+        <div class="resumen-foto-wrap position-relative">
+          <img
+            [src]="cotizacion.alojamiento.imagenPrincipal"
+            [alt]="cotizacion.alojamiento.nombre"
+            class="resumen-foto w-100"
+          />
+          <span class="insignia-tipo position-absolute top-0 start-0 m-3">
+            {{ cotizacion.alojamiento.tipo }}
+          </span>
+          <span class="insignia-ciudad position-absolute top-0 end-0 m-3">
+            📍 {{ cotizacion.alojamiento.ciudad }}
+          </span>
+        </div>
+
+        <div class="p-4">
+          <h3 class="h4 fw-bold mb-1">{{ cotizacion.alojamiento.nombre }}</h3>
+          <p class="text-muted small mb-3">{{ cotizacion.alojamiento.ubicacion }}</p>
+
+          <hr class="my-3 text-secondary opacity-25" />
+
+          <!-- Fechas y Huéspedes -->
+          <div class="row g-2 mb-3 small">
+            <div class="col-6">
+              <div class="dato-bloque p-2 rounded">
+                <span class="d-block text-muted">Llegada</span>
+                <strong>{{ cotizacion.fechaLlegada }}</strong>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="dato-bloque p-2 rounded">
+                <span class="d-block text-muted">Salida</span>
+                <strong>{{ cotizacion.fechaSalida }}</strong>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="dato-bloque p-2 rounded">
+                <span class="d-block text-muted">Duración</span>
+                <strong>{{ cotizacion.noches }} {{ cotizacion.noches === 1 ? 'noche' : 'noches' }}</strong>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="dato-bloque p-2 rounded">
+                <span class="d-block text-muted">Huéspedes</span>
+                <strong>{{ cotizacion.huespedes }} {{ cotizacion.huespedes === 1 ? 'persona' : 'personas' }}</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desglose de Costos -->
+          <h4 class="h6 fw-bold mb-3 text-uppercase text-muted">Desglose del precio</h4>
+          <ul class="list-unstyled mb-3 small">
+            <li class="d-flex justify-content-between py-1">
+              <span>${{ cotizacion.alojamiento.precioNoche | number:'1.0-0' }} × {{ cotizacion.noches }} noches</span>
+              <span>${{ subtotalCalculado | number:'1.0-0' }}</span>
+            </li>
+            <li class="d-flex justify-content-between py-1">
+              <span>Tarifa de limpieza</span>
+              <span>${{ tarifaLimpiezaCalculada | number:'1.0-0' }}</span>
+            </li>
+            <li class="d-flex justify-content-between py-1">
+              <span>Tarifa de servicio (10%)</span>
+              <span>${{ tarifaServicioCalculada | number:'1.0-0' }}</span>
+            </li>
+          </ul>
+
+          <div class="total-bloque d-flex justify-content-between align-items-center p-3 rounded mb-3">
+            <div>
+              <span class="d-block small text-muted">Total a pagar</span>
+              <strong class="h4 mb-0 text-verde">${{ cotizacion.total | number:'1.0-0' }} COP</strong>
+            </div>
+            <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1">
+              Estado: CONFIRMADA
+            </span>
+          </div>
+
+          <div class="garantia-aviso p-2 rounded small text-muted d-flex align-items-center gap-2">
+            <span>🛡️</span>
+            <span>Simulación segura. No se realizarán cargos a ninguna tarjeta.</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="col-md-6">
-      <div class="card p-3">
-        <label class="form-label">Nombre del huésped</label>
-        <input type="text" class="form-control" [(ngModel)]="nombre">
+    <!-- Columna Derecha: Formulario de Huésped -->
+    <div class="col-lg-7 order-lg-1">
+      <div class="tarjeta p-4 p-md-5 shadow-sm">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div>
+            <span class="badge bg-primary-subtle text-primary mb-2">Paso 2 de 2</span>
+            <h1 class="h2 fw-bold mb-1">Datos del Huésped</h1>
+          </div>
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary"
+            (click)="volverAlDetalle()"
+            title="Modificar cotización o fechas"
+          >
+            ← Cambiar fechas
+          </button>
+        </div>
 
-        <label class="form-label mt-2">Correo electrónico</label>
-        <input type="email" class="form-control" [(ngModel)]="correo">
+        <p class="text-muted mb-4">
+          Ingresa la información del huésped titular para generar la reserva. La confirmación se asociará a este nombre y correo.
+        </p>
 
-        <div class="alert alert-danger mt-3" *ngIf="mensajeError">{{mensajeError}}</div>
+        <!-- Mensaje de Error -->
+        <div *ngIf="mensajeError" class="alert alert-danger d-flex align-items-center gap-2 mb-4" role="alert">
+          <span>⚠️</span>
+          <div>{{ mensajeError }}</div>
+        </div>
 
-        <button class="btn btn-success mt-3" (click)="confirmarReserva()">Confirmar reserva</button>
+        <form (ngSubmit)="confirmarReserva()" novalidate>
+          <!-- Nombre Completo -->
+          <div class="mb-3">
+            <label for="nombreHuesped" class="form-label fw-semibold">
+              Nombre completo del huésped <span class="text-danger">*</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-text bg-white">👤</span>
+              <input
+                id="nombreHuesped"
+                type="text"
+                class="form-control form-control-lg"
+                placeholder="Ej. Laura Gómez"
+                [(ngModel)]="nombre"
+                name="nombre"
+                autocomplete="name"
+                required
+              />
+            </div>
+            <div class="form-text">Nombre y apellido tal como aparecen en el documento.</div>
+          </div>
+
+          <!-- Correo Electrónico -->
+          <div class="mb-3">
+            <label for="correoHuesped" class="form-label fw-semibold">
+              Correo electrónico <span class="text-danger">*</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-text bg-white">✉️</span>
+              <input
+                id="correoHuesped"
+                type="email"
+                class="form-control form-control-lg"
+                placeholder="Ej. laura.gomez@ejemplo.com"
+                [(ngModel)]="correo"
+                name="correo"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div class="form-text">Te enviaremos la confirmación y los detalles de tu estancia aquí.</div>
+          </div>
+
+          <!-- Teléfono opcional -->
+          <div class="mb-4">
+            <label for="telefonoHuesped" class="form-label fw-semibold">
+              Teléfono de contacto <span class="text-muted small">(opcional)</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-text bg-white">📱</span>
+              <input
+                id="telefonoHuesped"
+                type="tel"
+                class="form-control"
+                placeholder="Ej. +57 300 123 4567"
+                [(ngModel)]="telefono"
+                name="telefono"
+                autocomplete="tel"
+              />
+            </div>
+          </div>
+
+          <!-- Reglas del Alojamiento -->
+          <div *ngIf="cotizacion.alojamiento.reglas?.length" class="reglas-box p-3 rounded mb-4">
+            <h4 class="h6 fw-bold mb-2">Reglas del alojamiento:</h4>
+            <ul class="mb-0 small text-muted ps-3">
+              <li *ngFor="let regla of cotizacion.alojamiento.reglas">{{ regla }}</li>
+            </ul>
+          </div>
+
+          <!-- Checkbox aceptación -->
+          <div class="form-check mb-4">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="aceptoReglasCheck"
+              [(ngModel)]="aceptoReglas"
+              name="aceptoReglas"
+            />
+            <label class="form-check-label small" for="aceptoReglasCheck">
+              He leído y acepto las normas de convivencia del alojamiento y la política de reserva simulada.
+            </label>
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="d-flex flex-column flex-sm-row gap-3 pt-2">
+            <button
+              type="submit"
+              class="btn btn-marca btn-lg flex-grow-1 d-flex align-items-center justify-content-center gap-2"
+              [disabled]="procesando"
+            >
+              <span *ngIf="procesando" class="spinner-border spinner-border-sm" role="status"></span>
+              <span *ngIf="!procesando">✓</span>
+              <span>{{ procesando ? 'Confirmando reserva...' : 'Confirmar Reserva' }}</span>
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-lg"
+              (click)="volverAlDetalle()"
+              [disabled]="procesando"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
 

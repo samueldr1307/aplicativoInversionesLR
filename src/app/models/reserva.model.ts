@@ -11,4 +11,8 @@ export interface Reserva {
   nombreHuesped: string;
   correo: string;
   estado: string;
+  imagenAlojamiento?: string;
 }
+
+export type ReservaModel = Reserva;
+

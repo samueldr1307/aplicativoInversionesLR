@@ -1,0 +1,93 @@
+.resumen-foto-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background-color: #f1f5f9;
+}
+
+.resumen-foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.resumen-card:hover .resumen-foto {
+  transform: scale(1.03);
+}
+
+.insignia-tipo {
+  background-color: rgba(20, 80, 77, 0.88);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.insignia-ciudad {
+  background-color: rgba(255, 255, 255, 0.92);
+  color: var(--texto, #2b2f33);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.dato-bloque {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.total-bloque {
+  background-color: #e8f1f0;
+  border: 1px solid #cce3e1;
+}
+
+.text-verde {
+  color: var(--verde, #1f6f6b);
+}
+
+.garantia-aviso {
+  background-color: #faf7f2;
+  border: 1px dashed #d1d5db;
+}
+
+.reglas-box {
+  background-color: #fef9f6;
+  border: 1px solid #fed7aa;
+}
+
+.input-group-text {
+  border-color: #d1d5db;
+  color: #6b7280;
+}
+
+.form-control:focus {
+  border-color: var(--verde, #1f6f6b);
+  box-shadow: 0 0 0 0.25rem rgba(31, 111, 107, 0.2);
+}
+
+.form-check-input:checked {
+  background-color: var(--verde, #1f6f6b);
+  border-color: var(--verde, #1f6f6b);
+}
+
+.tarjeta-vacia {
+  background-color: #fff;
+  border-radius: 16px;
+  max-width: 580px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+}
+
+.icono-vacio {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.breadcrumb-item a {
+  color: var(--verde, #1f6f6b);
+}
