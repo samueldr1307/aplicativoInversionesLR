@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ReservaModel } from '../models/reserva.model';
 import { AlojamientoModel } from '../models/alojamiento.model';
+import { ReservaModel as Reserva } from '../models/reserva.model';
+import { AlojamientoModel as Alojamiento } from '../models/alojamiento.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +12,10 @@ export class ReservaService {
 
   cotizacionActual: {
     alojamiento: AlojamientoModel;
+  private reservas: Reserva[] = [];
+
+  cotizacionActual: {
+    alojamiento: Alojamiento;
     fechaLlegada: string;
     fechaSalida: string;
     huespedes: number;
@@ -34,6 +40,7 @@ export class ReservaService {
     const c = this.cotizacionActual;
 
     const nuevaReserva: ReservaModel = {
+    const nuevaReserva: Reserva = {
       id: this.reservas.length + 1,
       alojamientoId: c.alojamiento.id,
       nombreAlojamiento: c.alojamiento.nombre,
@@ -54,6 +61,7 @@ export class ReservaService {
   }
 
   getReservas(): ReservaModel[] {
+  getReservas(): Reserva[] {
     return this.reservas;
   }
 }
