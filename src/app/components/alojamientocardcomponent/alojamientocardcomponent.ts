@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Alojamiento } from '../../models/alojamiento.model';
 
 @Component({
-  selector: 'app-alojamientocardcomponent',
+  selector: 'app-alojamiento-card',
   standalone: false,
   styleUrl: './alojamientocardcomponent.css',
   templateUrl: './alojamientocardcomponent.html',
