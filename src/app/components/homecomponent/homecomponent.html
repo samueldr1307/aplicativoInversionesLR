@@ -1,0 +1,40 @@
+<div class="hero" style="background-image: url('assets/images/cartagena.jpg')">
+  <div class="container contenido">
+    <span class="insignia">Inversiones LR</span>
+    <h1 class="mt-3">Encuentra tu próximo lugar para descansar</h1>
+    <p class="lead mb-4">Apartamentos, cabañas y casas en los mejores destinos de Colombia.</p>
+    <a routerLink="/listado" class="btn btn-coral btn-lg">Explorar alojamientos</a>
+  </div>
+</div>
+
+<div class="container seccion">
+  <h2 class="titulo-seccion">Alojamientos destacados</h2>
+  <p class="subtitulo-seccion">Los mejor calificados por nuestros huéspedes</p>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let alojamiento of destacados">
+      <app-alojamiento-card [alojamiento]="alojamiento"></app-alojamiento-card>
+    </div>
+  </div>
+</div>
+
+<div class="container seccion">
+  <h2 class="titulo-seccion text-center mb-4">¿Cómo funciona?</h2>
+  <div class="row text-center">
+    <div class="col-md-4 mb-4">
+      <div class="numero">1</div>
+      <h5>Explora</h5>
+      <p class="ciudad">Filtra por ciudad, tipo de alojamiento, huéspedes y precio máximo.</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="numero">2</div>
+      <h5>Cotiza</h5>
+      <p class="ciudad">Elige tus fechas y mira el valor total antes de decidir.</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="numero">3</div>
+      <h5>Reserva</h5>
+      <p class="ciudad">Confirma con tu nombre y correo, y consulta tus reservas cuando quieras.</p>
+    </div>
+  </div>
+</div>
