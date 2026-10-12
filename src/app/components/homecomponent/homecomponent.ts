@@ -5,8 +5,8 @@ import { Alojamiento } from '../../models/alojamiento.model';
 @Component({
   selector: 'app-home',
   standalone: false,
-  styleUrl: './home.css',
-  templateUrl: './home.html',
+  styleUrl: './homecomponent.css',
+  templateUrl: './homecomponent.html',
 })
 export class Home implements OnInit {
   destacados: Alojamiento[] = [];

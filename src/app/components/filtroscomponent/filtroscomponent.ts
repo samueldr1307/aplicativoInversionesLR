@@ -4,11 +4,10 @@ import { Filtro } from '../../models/filtro.model';
 @Component({
   selector: 'app-filtros',
   standalone: false,
-  styleUrl: './filtros.css',
-  templateUrl: './filtros.html',
+  styleUrl: './filtroscomponent.css',
+  templateUrl: './filtroscomponent.html',
 })
 export class Filtros {
-
   @Input() ciudades: string[] = [];
   @Input() tipos: string[] = [];
   @Output() filtrosCambiaron = new EventEmitter<Filtro>();
@@ -23,7 +22,7 @@ export class Filtros {
       ciudad: this.ciudad,
       huespedes: this.huespedes,
       tipo: this.tipo,
-      precioMax: this.precioMax
+      precioMax: this.precioMax,
     });
   }
 
@@ -34,5 +33,4 @@ export class Filtros {
     this.precioMax = null;
     this.cambio();
   }
-
 }

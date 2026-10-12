@@ -6,8 +6,8 @@ import { Filtro } from '../../models/filtro.model';
 @Component({
   selector: 'app-listado-alojamientos',
   standalone: false,
-  styleUrl: './listado-alojamientos.css',
-  templateUrl: './listado-alojamientos.html',
+  styleUrl: './listadoalojamientoscomponent.css',
+  templateUrl: './listadoalojamientoscomponent.html',
 })
 export class ListadoAlojamientos implements OnInit {
   todos: Alojamiento[] = [];

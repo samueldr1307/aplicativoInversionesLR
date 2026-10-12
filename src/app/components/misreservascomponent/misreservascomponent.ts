@@ -5,8 +5,8 @@ import { Reserva } from '../../models/reserva.model';
 @Component({
   selector: 'app-mis-reservas',
   standalone: false,
-  styleUrl: './mis-reservas.css',
-  templateUrl: './mis-reservas.html',
+  styleUrl: './misreservascomponent.css',
+  templateUrl: './misreservascomponent.html',
 })
 export class MisReservas implements OnInit {
   reservas: Reserva[] = [];

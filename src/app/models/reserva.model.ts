@@ -1,4 +1,4 @@
-export interface ReservaModel {
+export interface Reserva {
   id: number;
   alojamientoId: number;
   nombreAlojamiento: string;
