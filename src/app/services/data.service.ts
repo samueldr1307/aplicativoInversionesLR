@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AlojamientoModel } from '../models/alojamiento.model';
-import { ResenaModel } from '../models/resena.model';
+import { Alojamiento } from '../models/alojamiento.model';
+import { Resena } from '../models/resena.model';
 
 interface MarketplaceData {
-  alojamientos: AlojamientoModel[];
-  resenas: ResenaModel[];
+  alojamientos: Alojamiento[];
+  resenas: Resena[];
 }
 
 @Injectable({
