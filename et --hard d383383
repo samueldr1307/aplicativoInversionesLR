@@ -1,0 +1,33 @@
+[33mf242af8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/Simon[m[33m, [m[1;32mSimon[m[33m)[m HEAD@{0}: reset: moving to HEAD~3
+[33m317c3e8[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{1}: checkout: moving from Julian to main
+[33m6d7e13d[m[33m ([m[1;31morigin/Julian[m[33m, [m[1;32mJulian[m[33m)[m HEAD@{2}: checkout: moving from Julian to Julian
+[33m6d7e13d[m[33m ([m[1;31morigin/Julian[m[33m, [m[1;32mJulian[m[33m)[m HEAD@{3}: checkout: moving from main to Julian
+[33m317c3e8[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{4}: checkout: moving from Julian to main
+[33m6d7e13d[m[33m ([m[1;31morigin/Julian[m[33m, [m[1;32mJulian[m[33m)[m HEAD@{5}: checkout: moving from main to Julian
+[33m317c3e8[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{6}: checkout: moving from Julian to main
+[33m6d7e13d[m[33m ([m[1;31morigin/Julian[m[33m, [m[1;32mJulian[m[33m)[m HEAD@{7}: checkout: moving from main to Julian
+[33m317c3e8[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{8}: commit: add service folder
+[33md383383[m HEAD@{9}: checkout: moving from Santiago to main
+[33meec37de[m[33m ([m[1;31morigin/Santiago[m[33m, [m[1;32mSantiago[m[33m)[m HEAD@{10}: checkout: moving from main to Santiago
+[33md383383[m HEAD@{11}: checkout: moving from Julian to main
+[33m6d7e13d[m[33m ([m[1;31morigin/Julian[m[33m, [m[1;32mJulian[m[33m)[m HEAD@{12}: checkout: moving from main to Julian
+[33mf242af8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/Simon[m[33m, [m[1;32mSimon[m[33m)[m HEAD@{13}: checkout: moving from Julian to main
+[33m6d7e13d[m[33m ([m[1;31morigin/Julian[m[33m, [m[1;32mJulian[m[33m)[m HEAD@{14}: reset: moving to HEAD
+[33m6d7e13d[m[33m ([m[1;31morigin/Julian[m[33m, [m[1;32mJulian[m[33m)[m HEAD@{15}: commit (merge): Merge branch 'main' into Julian
+[33m42470d5[m HEAD@{16}: checkout: moving from Simon to Julian
+[33mf242af8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/Simon[m[33m, [m[1;32mSimon[m[33m)[m HEAD@{17}: checkout: moving from main to Simon
+[33mf242af8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/Simon[m[33m, [m[1;32mSimon[m[33m)[m HEAD@{18}: checkout: moving from Julian to main
+[33m42470d5[m HEAD@{19}: checkout: moving from main to Julian
+[33mf242af8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/Simon[m[33m, [m[1;32mSimon[m[33m)[m HEAD@{20}: reset: moving to HEAD
+[33mf242af8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/Simon[m[33m, [m[1;32mSimon[m[33m)[m HEAD@{21}: reset: moving to HEAD
+[33mf242af8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/Simon[m[33m, [m[1;32mSimon[m[33m)[m HEAD@{22}: checkout: moving from Julian to main
+[33m42470d5[m HEAD@{23}: commit: listadoalojamientocomponent
+[33mbafd05c[m HEAD@{24}: checkout: moving from main to Julian
+[33mf242af8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/Simon[m[33m, [m[1;32mSimon[m[33m)[m HEAD@{25}: checkout: moving from Simon to main
+[33mf242af8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/Simon[m[33m, [m[1;32mSimon[m[33m)[m HEAD@{26}: checkout: moving from main to Simon
+[33mf242af8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/Simon[m[33m, [m[1;32mSimon[m[33m)[m HEAD@{27}: checkout: moving from Julian to main
+[33mbafd05c[m HEAD@{28}: commit: misreservascomponent
+[33mcf17cc7[m HEAD@{29}: commit: navbar
+[33mfff224a[m HEAD@{30}: commit: home Component
+[33m4cb5419[m HEAD@{31}: checkout: moving from main to Julian
+[33m4cb5419[m HEAD@{32}: clone: from https://github.com/samueldr1307/aplicativoInversionesLR.git
