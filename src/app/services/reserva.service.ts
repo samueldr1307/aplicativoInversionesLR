@@ -32,7 +32,8 @@ export class ReservaService {
     try {
       const guardadas = localStorage.getItem('reservas');
       if (guardadas) {
-        this.reservas = JSON.parse(guardadas);
+        const parsed = JSON.parse(guardadas);
+        this.reservas = Array.isArray(parsed) ? parsed : [];
       }
     } catch (e) {
       console.error('Error al cargar reservas de localStorage', e);
@@ -74,7 +75,8 @@ export class ReservaService {
     if (!this.cotizacionActual) return null;
 
     const c = this.cotizacionActual;
-    const nextId = this.reservas.length > 0 ? Math.max(...this.reservas.map(r => r.id)) + 1 : 1;
+    const maxId = this.reservas.reduce((max, r) => Math.max(max, Number(r.id) || 0), 0);
+    const nextId = maxId + 1;
 
     const nuevaReserva: Reserva = {
       id: nextId,

@@ -29,9 +29,14 @@ export class Formularioreservacomponent implements OnInit {
   ngOnInit(): void {
     this.cotizacion = this.reservaService.cotizacionActual;
     if (this.cotizacion && this.cotizacion.alojamiento) {
-      this.subtotalCalculado = this.cotizacion.noches * this.cotizacion.alojamiento.precioNoche;
-      this.tarifaLimpiezaCalculada = this.cotizacion.alojamiento.tarifaLimpieza || 0;
+      const noches = Number(this.cotizacion.noches) || 1;
+      const precioNoche = Number(this.cotizacion.alojamiento.precioNoche) || 0;
+      this.subtotalCalculado = noches * precioNoche;
+      this.tarifaLimpiezaCalculada = Number(this.cotizacion.alojamiento.tarifaLimpieza) || 0;
       this.tarifaServicioCalculada = Math.round(this.subtotalCalculado * 0.1);
+      if (!this.cotizacion.total || isNaN(Number(this.cotizacion.total))) {
+        this.cotizacion.total = this.subtotalCalculado + this.tarifaLimpiezaCalculada + this.tarifaServicioCalculada;
+      }
     }
   }
 
@@ -41,6 +46,7 @@ export class Formularioreservacomponent implements OnInit {
   }
 
   confirmarReserva(): void {
+    if (this.procesando) return;
     this.mensajeError = '';
 
     if (!this.cotizacion) {

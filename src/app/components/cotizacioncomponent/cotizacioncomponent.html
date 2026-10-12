@@ -1,5 +1,5 @@
 <div class="card p-3" *ngIf="alojamiento">
-  <h4>${{alojamiento.precioNoche}} / noche</h4>
+  <h4>${{alojamiento.precioNoche | puntos}} / noche</h4>
 
   <label class="form-label mt-2">Fecha de llegada</label>
   <input type="date" class="form-control" [(ngModel)]="fechaLlegada" (input)="reiniciarCotizacion()">
@@ -16,10 +16,10 @@
 
   <div *ngIf="cotizacionValida" class="mt-3">
     <p>Noches: {{noches}}</p>
-    <p>Subtotal: ${{subtotal}}</p>
-    <p>Tarifa de limpieza: ${{alojamiento.tarifaLimpieza}}</p>
-    <p>Tarifa de servicio: ${{tarifaServicio}}</p>
-    <p class="fw-bold">Total: ${{total}}</p>
+    <p>Subtotal: ${{subtotal | puntos}}</p>
+    <p>Tarifa de limpieza: ${{alojamiento.tarifaLimpieza | puntos}}</p>
+    <p>Tarifa de servicio: ${{tarifaServicio | puntos}}</p>
+    <p class="fw-bold">Total: ${{total | puntos}}</p>
     <button class="btn btn-success w-100" (click)="irAReservar()">Reservar</button>
   </div>
 </div>

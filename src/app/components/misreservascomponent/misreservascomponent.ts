@@ -49,7 +49,7 @@ export class MisReservas implements OnInit {
   get totalInversion(): number {
     return this.reservas
       .filter((r) => r.estado === 'CONFIRMADA')
-      .reduce((sum, r) => sum + r.total, 0);
+      .reduce((sum, r) => sum + (Number(r.total) || 0), 0);
   }
 
   get cantidadConfirmadas(): number {
