@@ -1,1 +1,247 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --verde: #1f6f6b;
+  --verde-oscuro: #14504d;
+  --coral: #e76f51;
+  --coral-oscuro: #cf5a3d;
+  --crema: #faf7f2;
+  --texto: #2b2f33;
+  --gris: #6b7280;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--crema);
+  color: var(--texto);
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+}
+
+/* botones */
+.btn-marca {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--verde);
+  --bs-btn-border-color: var(--verde);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--verde-oscuro);
+  --bs-btn-hover-border-color: var(--verde-oscuro);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--verde-oscuro);
+  --bs-btn-active-border-color: var(--verde-oscuro);
+}
+
+.btn-marca-outline {
+  --bs-btn-color: var(--verde);
+  --bs-btn-border-color: var(--verde);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--verde);
+  --bs-btn-hover-border-color: var(--verde);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--verde);
+  --bs-btn-active-border-color: var(--verde);
+}
+
+.btn-coral {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--coral);
+  --bs-btn-border-color: var(--coral);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--coral-oscuro);
+  --bs-btn-hover-border-color: var(--coral-oscuro);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--coral-oscuro);
+  --bs-btn-active-border-color: var(--coral-oscuro);
+}
+
+/* navbar */
+.barra {
+  background-color: #fff;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+}
+
+.barra .navbar-brand {
+  color: var(--verde);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.barra .navbar-brand span {
+  color: var(--coral);
+}
+
+.barra .nav-link {
+  color: var(--texto);
+  font-weight: 500;
+}
+
+.barra .nav-link:hover,
+.barra .nav-link.active {
+  color: var(--verde);
+}
+
+/* footer */
+.pie {
+  background-color: var(--verde-oscuro);
+  color: #e6efee;
+  padding: 40px 0 20px;
+  margin-top: 60px;
+}
+
+.pie .marca {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.pie .marca span {
+  color: var(--coral);
+}
+
+.pie a {
+  color: #e6efee;
+  text-decoration: none;
+}
+
+.pie a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.pie hr {
+  border-color: rgba(255, 255, 255, 0.3);
+  opacity: 1;
+}
+
+/* portada del home */
+.hero {
+  position: relative;
+  min-height: 460px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(20, 80, 77, 0.85), rgba(20, 80, 77, 0.3));
+}
+
+.hero .contenido {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  max-width: 600px;
+}
+
+.insignia {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+/* secciones */
+.seccion {
+  margin-top: 56px;
+}
+
+.titulo-seccion {
+  font-weight: 700;
+}
+
+.subtitulo-seccion {
+  color: var(--gris);
+  margin-bottom: 24px;
+}
+
+.numero {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--coral);
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px auto;
+}
+
+/* tarjetas de alojamiento */
+.tarjeta {
+  background-color: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.foto-caja {
+  position: relative;
+}
+
+.foto {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.calificacion {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #fff;
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ciudad {
+  color: var(--gris);
+  font-size: 0.9rem;
+}
+
+.etiqueta {
+  display: inline-block;
+  background-color: #e8f1f0;
+  color: var(--verde);
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin: 0 4px 4px 0;
+}
+
+.precio {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.precio span {
+  font-weight: 400;
+  color: var(--gris);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
