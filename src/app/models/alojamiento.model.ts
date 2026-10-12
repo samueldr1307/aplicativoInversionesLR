@@ -1,4 +1,4 @@
-export interface AlojamientoModel {
+export interface Alojamiento {
   id: number;
   nombre: string;
   descripcion: string;
@@ -18,4 +18,3 @@ export interface AlojamientoModel {
   servicios: string[];
   reglas: string[];
 }
-
